@@ -1,3 +1,334 @@
+<style>
+.tns-outer{padding:0 !important}.tns-outer [hidden]{display:none !important}.tns-outer [aria-controls],.tns-outer [data-action]{cursor:pointer}.tns-slider{-webkit-transition:all 0s;-moz-transition:all 0s;transition:all 0s}.tns-slider>.tns-item{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.tns-horizontal.tns-subpixel{white-space:nowrap}.tns-horizontal.tns-subpixel>.tns-item{display:inline-block;vertical-align:top;white-space:normal}.tns-horizontal.tns-no-subpixel:after{content:'';display:table;clear:both}.tns-horizontal.tns-no-subpixel>.tns-item{float:left}.tns-horizontal.tns-carousel.tns-no-subpixel>.tns-item{margin-right:-100%}.tns-no-calc{position:relative;left:0}.tns-gallery{position:relative;left:0;min-height:1px}.tns-gallery>.tns-item{position:absolute;left:-100%;-webkit-transition:transform 0s, opacity 0s;-moz-transition:transform 0s, opacity 0s;transition:transform 0s, opacity 0s}.tns-gallery>.tns-slide-active{position:relative;left:auto !important}.tns-gallery>.tns-moving{-webkit-transition:all 0.25s;-moz-transition:all 0.25s;transition:all 0.25s}.tns-autowidth{display:inline-block}.tns-lazy-img{-webkit-transition:opacity 0.6s;-moz-transition:opacity 0.6s;transition:opacity 0.6s;opacity:0.6}.tns-lazy-img.tns-complete{opacity:1}.tns-ah{-webkit-transition:height 0s;-moz-transition:height 0s;transition:height 0s}.tns-ovh{overflow:hidden}.tns-visually-hidden{position:absolute;left:-10000em}.tns-transparent{opacity:0;visibility:hidden}.tns-fadeIn{opacity:1;filter:alpha(opacity=100);z-index:0}.tns-normal,.tns-fadeOut{opacity:0;filter:alpha(opacity=0);z-index:-1}.tns-vpfix{white-space:nowrap}.tns-vpfix>div,.tns-vpfix>li{display:inline-block}.tns-t-subp2{margin:0 auto;width:310px;position:relative;height:10px;overflow:hidden}.tns-t-ct{width:2333.3333333%;width:-webkit-calc(100% * 70 / 3);width:-moz-calc(100% * 70 / 3);width:calc(100% * 70 / 3);position:absolute;right:0}.tns-t-ct:after{content:'';display:table;clear:both}.tns-t-ct>div{width:1.4285714%;width:-webkit-calc(100% / 70);width:-moz-calc(100% / 70);width:calc(100% / 70);height:10px;float:left}
+</style>
+<style>
+  /* Slider */
+.slick-slider
+{
+    position: relative;
+
+    display: block;
+    box-sizing: border-box;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list
+{
+    position: relative;
+
+    display: block;
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus
+{
+    outline: none;
+}
+.slick-list.dragging
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.slick-track
+{
+    position: relative;
+    top: 0;
+    left: 0;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.slick-track:before,
+.slick-track:after
+{
+    display: table;
+
+    content: '';
+}
+.slick-track:after
+{
+    clear: both;
+}
+.slick-loading .slick-track
+{
+    visibility: hidden;
+}
+
+.slick-slide
+{
+    display: none;
+    float: left;
+
+    height: 100%;
+    min-height: 1px;
+}
+[dir='rtl'] .slick-slide
+{
+    float: right;
+}
+.slick-slide img
+{
+    display: block;
+}
+.slick-slide.slick-loading img
+{
+    display: none;
+}
+.slick-slide.dragging img
+{
+    pointer-events: none;
+}
+.slick-initialized .slick-slide
+{
+    display: block;
+}
+.slick-loading .slick-slide
+{
+    visibility: hidden;
+}
+.slick-vertical .slick-slide
+{
+    display: block;
+
+    height: auto;
+
+    border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+    display: none;
+}
+</style>
+
+<style>
+  @charset 'UTF-8';
+/* Slider */
+.slick-loading .slick-list
+{
+    background: #fff url('./ajax-loader.gif') center center no-repeat;
+}
+
+/* Icons */
+@font-face
+{
+    font-family: 'slick';
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('./fonts/slick.eot');
+    src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
+}
+/* Arrows */
+.slick-prev,
+.slick-next
+{
+    font-size: 0;
+    line-height: 0;
+
+    position: absolute;
+    top: 50%;
+
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+
+    cursor: pointer;
+
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus
+{
+    color: transparent;
+    outline: none;
+    background: transparent;
+}
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before
+{
+    opacity: 1;
+}
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before
+{
+    opacity: .25;
+}
+
+.slick-prev:before,
+.slick-next:before
+{
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+
+    opacity: .75;
+    color: white;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-prev
+{
+    left: -25px;
+}
+[dir='rtl'] .slick-prev
+{
+    right: -25px;
+    left: auto;
+}
+.slick-prev:before
+{
+    content: 'â†';
+}
+[dir='rtl'] .slick-prev:before
+{
+    content: 'â†’';
+}
+
+.slick-next
+{
+    right: -25px;
+}
+[dir='rtl'] .slick-next
+{
+    right: auto;
+    left: -25px;
+}
+.slick-next:before
+{
+    content: 'â†’';
+}
+[dir='rtl'] .slick-next:before
+{
+    content: 'â†';
+}
+
+/* Dots */
+.slick-dotted.slick-slider
+{
+    margin-bottom: 30px;
+}
+
+.slick-dots
+{
+    position: absolute;
+    bottom: -25px;
+
+    display: block;
+
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+
+    text-align: center;
+}
+.slick-dots li
+{
+    position: relative;
+
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    padding: 0;
+
+    cursor: pointer;
+}
+.slick-dots li button
+{
+    font-size: 0;
+    line-height: 0;
+
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+
+    cursor: pointer;
+
+    color: transparent;
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+.slick-dots li button:hover,
+.slick-dots li button:focus
+{
+    outline: none;
+}
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before
+{
+    opacity: 1;
+}
+.slick-dots li button:before
+{
+    font-family: 'slick';
+    font-size: 6px;
+    line-height: 20px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 20px;
+    height: 20px;
+
+    content: 'â€¢';
+    text-align: center;
+
+    opacity: .25;
+    color: black;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.slick-dots li.slick-active button:before
+{
+    opacity: .75;
+    color: black;
+}
+</style>
 <!-- Modal -->
 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -61,7 +392,7 @@
           <!-- row -->
           <div class="row align-items-center">
             <div class="col-3 col-md-2">
-              <!-- img --> <img src="../assets/images/products/product-img-1.jpg" alt="Ecommerce"
+              <!-- img --> <img src="<%= asset_path("products/product-single-img-3") %>" alt="Ecommerce"
                 class="img-fluid"></div>
             <div class="col-4 col-md-6 col-lg-5">
               <!-- title -->
@@ -107,7 +438,7 @@
           <!-- row -->
           <div class="row align-items-center">
             <div class="col-3 col-md-2">
-              <!-- img --> <img src="../assets/images/products/product-img-2.jpg" alt="Ecommerce"
+              <!-- img --> <img src="<%= asset_path("products/product-single-img-3") %>" alt="Ecommerce"
                 class="img-fluid"></div>
             <div class="col-4 col-md-6 col-lg-5">
               <!-- title -->
@@ -152,7 +483,7 @@
           <!-- row -->
           <div class="row align-items-center">
             <div class="col-3 col-md-2">
-              <!-- img --> <img src="../assets/images/products/product-img-3.jpg" alt="Ecommerce"
+              <!-- img --> <img src="<%= asset_path("products/product-single-img-3") %>" alt="Ecommerce"
                 class="img-fluid"></div>
             <div class="col-4 col-md-6 col-lg-5">
               <!-- title -->
@@ -197,7 +528,7 @@
           <!-- row -->
           <div class="row align-items-center">
             <div class="col-3 col-md-2">
-              <!-- img --> <img src="../assets/images/products/product-img-4.jpg" alt="Ecommerce"
+              <!-- img --> <img src="<%= asset_path("products/product-single-img-3") %>" alt="Ecommerce"
                 class="img-fluid"></div>
             <div class="col-4 col-md-6 col-lg-5">
               <!-- title -->
@@ -242,7 +573,7 @@
           <!-- row -->
           <div class="row align-items-center">
             <div class="col-3 col-md-2">
-              <!-- img --> <img src="../assets/images/products/product-img-5.jpg" alt="Ecommerce"
+              <!-- img --> <img src="<%= asset_path("products/product-single-img-3") %>" alt="Ecommerce"
                 class="img-fluid"></div>
             <div class="col-4 col-md-6 col-lg-5">
               <!-- title -->
@@ -360,62 +691,105 @@
 </div>
 
 <div class="row mt-2 mb-2">
-  <div class="col-md-6">
+  <div class="col-lg-6">
     <!-- img slide -->
-    <div class="tns-outer" id="product-ow"><div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">slide <span class="current">2</span>  of 4</div><div id="product-mw" class="tns-ovh"><div class="tns-inner" id="product-iw"><div class="product  tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal" id="product" style="transform: translate3d(-16.6667%, 0px, 0px);"><div class="tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
-      <div class="zoom" onmousemove="zoom(event)" style="background-image: url(<%= asset_path("products/product-single-img-4.jpg") %>)">
+    <div class="product productModal" id="productModal">
+      <div
+        class="zoom"
+        onmousemove="zoom(event)"
+        style="
+          background-image: url(<%= asset_path("products/product-single-img-3") %>);
+        "
+      >
         <!-- img -->
-        <%= image_tag "products/product-single-img-4.jpg" %>
+        <img
+          src="<%= asset_path("products/product-single-img-3") %>"
+          alt=""
+    >
       </div>
-      </div>
-      <div class="zoom tns-item tns-slide-active" onmousemove="zoom(event)" style="background-image: url(<%= asset_path("products/product-single-img-1.jpg") %>); background-position: 97.0126% 9.85325%;" id="product-item0">
-        <!-- img -->
-        <%= image_tag "products/product-single-img-1.jpg" %>
-      </div>
-      <div class="tns-item" id="product-item1" aria-hidden="true" tabindex="-1">
-        <div class="zoom" onmousemove="zoom(event)" style="background-image: url(<%= asset_path("products/product-single-img-4.jpg") %>); background-position: 1.10063% 73.3753%;">
-          <%= image_tag "products/product-single-img-2.jpg" %>
-        </div>
-      </div>
-      <div class="tns-item" id="product-item2" aria-hidden="true" tabindex="-1">
-        <div class="zoom" onmousemove="zoom(event)" style="background-image: url(<%= asset_path("products/product-single-img-4.jpg") %>); background-position: 99.3711% 58.7002%;">
-          <%= image_tag "products/product-single-img-3.jpg" %>
-        </div>
-      </div>
-      <div class="tns-item" id="product-item3" aria-hidden="true" tabindex="-1">
-        <div class="zoom" onmousemove="zoom(event)" style="background-image: url(<%= asset_path("products/product-single-img-4.jpg") %>); background-position: 32.2327% 99.5807%;">
+      <div>
+        <div
+          class="zoom"
+          onmousemove="zoom(event)"
+          style="
+            background-image: url(<%= asset_path("products/product-single-img-3") %>);
+          "
+        >
           <!-- img -->
-          <%= image_tag "products/product-single-img-4.jpg" %>
+          <img
+            src="<%= asset_path("products/product-single-img-3") %>"
+            alt=""
+      >
         </div>
       </div>
-    <div class="zoom tns-item tns-slide-cloned" onmousemove="zoom(event)" style="background-image: url(<%= asset_path("products/product-single-img-4.jpg") %>)" aria-hidden="true" tabindex="-1">
-        <%= image_tag "products/product-single-img-1.jpg" %>
-      </div></div></div></div></div>
+      <div>
+        <div
+          class="zoom"
+          onmousemove="zoom(event)"
+          style="
+            background-image: url(<%= asset_path("products/product-single-img-3") %>);
+          "
+        >
+          <!-- img -->
+          <img
+            src="<%= asset_path("products/product-single-img-3") %>"
+            alt=""
+      >
+        </div>
+      </div>
+      <div>
+        <div
+          class="zoom"
+          onmousemove="zoom(event)"
+          style="
+            background-image: url(<%= asset_path("products/product-single-img-3") %>);
+          "
+        >
+          <!-- img -->
+          <img
+            src="<%= asset_path("products/product-single-img-3") %>"
+            alt=""
+      >
+        </div>
+      </div>
+    </div>
     <!-- product tools -->
     <div class="product-tools">
-      <div class="thumbnails row g-3" id="productThumbnails" aria-label="Carousel Pagination">
-        <div class="col-3 tns-nav-active" data-nav="0" aria-label="Carousel Page 1 (Current Slide)" aria-controls="product">
+      <div class="thumbnails row g-3" id="productModalThumbnails">
+        <div class="col-3" class="tns-nav-active">
           <div class="thumbnails-img">
             <!-- img -->
-            <%= image_tag "products/product-single-img-1.jpg" %>
+            <img
+              src="<%= asset_path("products/product-single-img-3") %>"
+              alt=""
+        >
           </div>
         </div>
-        <div class="col-3" data-nav="1" aria-label="Carousel Page 2" aria-controls="product" tabindex="-1">
-          <div class="thumbnails-img">
+        <div class="col-3">
+          <div class="thumbnails-img" >
             <!-- img -->
-            <%= image_tag "products/product-single-img-2.jpg" %>
+            <img
+              src="<%= asset_path("products/product-single-img-3") %>"
+              alt=""
+        >
           </div>
         </div>
-        <div class="col-3" data-nav="2" aria-label="Carousel Page 3" aria-controls="product" tabindex="-1">
+        <div class="col-3">
           <div class="thumbnails-img">
             <!-- img -->
-            <%= image_tag "products/product-single-img-3.jpg" %>
+            <img
+              src="<%= asset_path("products/product-single-img-3") %>"
+              alt=""
+        >
           </div>
         </div>
-        <div class="col-3" data-nav="3" aria-label="Carousel Page 4" aria-controls="product" tabindex="-1">
+        <div class="col-3">
           <div class="thumbnails-img">
             <!-- img -->
-            <%= image_tag "products/product-single-img-4.jpg" %>
+            <img
+              src="<%= asset_path("products/product-single-img-3") %>"
+              alt=""
+        >
           </div>
         </div>
       </div>
