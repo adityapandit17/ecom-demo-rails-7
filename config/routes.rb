@@ -3,5 +3,12 @@ Rails.application.routes.draw do
   get 'home/index'
   resources :products
 
-  root "home#index"
+  root 'home#index'
+
+  namespace :admin do
+    resources :categories
+    resources :products
+  end
+
+  get '*path' => redirect('/')
 end
